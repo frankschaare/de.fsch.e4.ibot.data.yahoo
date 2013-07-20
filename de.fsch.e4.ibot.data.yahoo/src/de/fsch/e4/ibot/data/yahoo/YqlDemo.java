@@ -7,6 +7,9 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpResponseException;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -16,21 +19,28 @@ import org.w3c.dom.NodeList;
  * @see http://idojava.blogspot.com/
  * @author Green Ido
  */
-public class YqlDemo {
+public class YqlDemo 
+{
 
 	/**
 	 * Find 'food' places for the JPR
 	 * @param args
 	 * @throws Exception
 	 */
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception 
+	{
 		String request = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search%20where%20query%3D%22food%22%20and%20location%3D%22crested%20butte%2C%20co%22&format=xml";
 
 		DefaultHttpClient client = new DefaultHttpClient();
-		GetMethod method = new GetMethod(request);
+		HttpGet get = new HttpGet(request);
+		HttpResponse response = client.execute(get);
 
-		int statusCode = client.execute(method);
-		if (statusCode != HttpStatus.SC_OK) {
+
+		if (response.getEntity() != null) 
+		{
+		InputStream in = response.getEntity().getContent();	
+		}
+	/*	if (statusCode != HttpStatus.SC_OK) {
 			System.err.println("Method failed: " + method.getStatusLine());
 		} else {
 			InputStream rstream = null;
@@ -61,7 +71,7 @@ public class YqlDemo {
 				System.out.println("-----------");
 
 			}
-		}
+		}*/
 	}
 
 }

@@ -8,4 +8,5 @@ Bundle-Vendor: Frank Schaare
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: org.osgi.framework;version="1.3.0"
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.apache.httpcomponents.httpclient;bundle-version="4.1.3"
+Require-Bundle: org.apache.httpcomponents.httpclient;bundle-version="4.1.3",
+ org.apache.httpcomponents.httpcore
